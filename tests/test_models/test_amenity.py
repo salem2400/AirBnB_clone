@@ -5,6 +5,7 @@ from time import sleep
 from models.amenity import Amenity
 from models import storage
 
+
 class TestAmenityInstantiation(unittest.TestCase):
     def test_no_args_instantiates(self):
         self.assertIsInstance(Amenity(), Amenity)
@@ -72,6 +73,7 @@ class TestAmenityInstantiation(unittest.TestCase):
         with self.assertRaises(TypeError):
             Amenity(id=None, created_at=None, updated_at=None)
 
+
 class TestAmenitySave(unittest.TestCase):
     def setUp(self):
         try:
@@ -119,6 +121,7 @@ class TestAmenitySave(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertIn(amid, f.read())
 
+
 class TestAmenityToDict(unittest.TestCase):
     def test_to_dict_type(self):
         self.assertIsInstance(Amenity().to_dict(), dict)
@@ -165,6 +168,7 @@ class TestAmenityToDict(unittest.TestCase):
         am = Amenity()
         with self.assertRaises(TypeError):
             am.to_dict(None)
+
 
 if __name__ == "__main__":
     unittest.main()
