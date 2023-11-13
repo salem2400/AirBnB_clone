@@ -85,12 +85,14 @@ class HBNBCommand(cmd.Cmd):
         """
         argl = parse(arg)
         if not argl:
+        if len(argl) == 0:
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
             instance = eval(argl[0])()
             print(instance.id)
+            print(eval(argl[0])().id)
             storage.save()
 
     def do_show(self, arg):
@@ -100,6 +102,7 @@ class HBNBCommand(cmd.Cmd):
         argl = parse(arg)
         objdict = storage.all()
         if not argl:
+        if len(argl) == 0:
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -116,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         argl = parse(arg)
         objdict = storage.all()
         if not argl:
+        if len(argl) == 0:
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -185,3 +189,15 @@ class HBNBCommand(cmd.Cmd):
         if len(argl) == 4:
             obj = objdict["{}.{}".format(argl[0], argl[1])]
             if argl[2] in obj.__class__.__dict__.keys
+        """
+        Display all instances or all instances of a specific class.
+        """
+        argl = parse(arg)
+        objdict = storage.all()
+        if len(argl) == 0:
+            print([str(obj) for obj in objdict.values()])
+        elif argl[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print([str(obj) for obj in objdict.values() if type(obj) == eval(argl[0])])
+
